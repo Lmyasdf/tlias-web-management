@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -26,11 +27,12 @@ public class EmpServiceImpl implements EmpService {
     }*/
 
     @Override
-    public PageResult<Emp> getPage(Integer page,Integer pageSize){
-    //    设置分页参数
-
+    public PageResult<Emp> getPage(Integer page, Integer pageSize, String name, Integer gender,
+                                   LocalDate begin, LocalDate end){
+        //设置分页参数
+        PageHelper.startPage(page,pageSize);
         //执行查询
-        List<Emp>empList = empMapper.list();
+        List<Emp>empList = empMapper.list(name,gender,begin,end);
 
         Page<Emp> p = (Page<Emp>)empList;
         return new PageResult<>(p.getTotal(),p.getResult());
