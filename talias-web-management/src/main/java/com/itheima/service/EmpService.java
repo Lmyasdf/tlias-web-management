@@ -9,4 +9,6 @@ import java.time.LocalDate;
 public interface EmpService {
     PageResult<Emp> getPage(Integer page, Integer pageSize,String name, Integer gender,
                             LocalDate begin, LocalDate end);
+
+    void save(Emp emp);
 }
