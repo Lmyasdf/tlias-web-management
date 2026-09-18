@@ -66,4 +66,11 @@ public class EmpServiceImpl implements EmpService {
              empExprMapper.insertBatch(exprList);
          }
     }
+
+//    删除
+    @Override
+    public void delete(List<Integer> ids){
+        empMapper.delete(ids);
+        empExprMapper.delete(ids);
+    }
 }

@@ -22,4 +22,11 @@
         order by e.update_time desc
 
     </select>
+
+    <delete id="delete">
+        delete from emp where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
