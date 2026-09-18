@@ -10,6 +10,11 @@ spring:
     username: java
     password: 123456
 
+  servlet:
+    multipart:
+#      单个文件最大10mb
+      max-file-size: 10MB
+
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
