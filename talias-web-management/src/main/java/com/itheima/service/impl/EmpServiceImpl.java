@@ -11,6 +11,7 @@ import com.itheima.service.EmpService;
 import org.apache.ibatis.annotations.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
@@ -45,6 +46,7 @@ public class EmpServiceImpl implements EmpService {
         return new PageResult<>(p.getTotal(),p.getResult());
     }
 
+    @Transactional(rollbackFor = {Exception.class})//事务管理
     @Override
     public void save(Emp emp){
     //    保存员工基本信息
