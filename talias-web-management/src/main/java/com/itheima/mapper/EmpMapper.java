@@ -23,4 +23,7 @@ public interface EmpMapper {
 
 
     void delete(List<Integer> ids);
+
+
+    Emp search(Integer id);
 }

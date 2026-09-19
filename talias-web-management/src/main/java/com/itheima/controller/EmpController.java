@@ -48,4 +48,13 @@ public class EmpController {
         empService.delete(ids);
         return Result.success();
     }
+
+//    查询员工
+    @GetMapping("/{id}")
+    public Result search(@PathVariable Integer id){
+        log.info("查询id为：{}",id);
+        Emp emp = empService.search(id);
+        return Result.success(emp);
+
+    }
 }

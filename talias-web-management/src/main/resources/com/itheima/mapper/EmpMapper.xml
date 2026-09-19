@@ -29,4 +29,41 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="search" resultMap = "rm">
+        select
+            e.*,
+            ee.id ee_id,
+            ee.company ee_company,
+            ee.job ee_job,
+            ee.begin ee_begin,
+            ee.end ee_end,
+            ee.emp_id ee_empid
+        from emp e left join emp_expr ee on e.id = ee.emp_id
+        where e.id = #{id}
+    </select>
+<!--   自定义结果集-->
+    <resultMap id="rm" type="com.itheima.pojo.Emp">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="gender" property="gender" />
+        <result column="name" property="name" />
+        <result column="image" property="image"/>
+        <result column="entry_date" property="entryDate" />
+        <result column="dept_id" property="deptId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+
+<!--       封装exprList-->
+        <collection property="exprList" ofType="com.itheima.pojo.EmpExpr">
+            <id column="ee_id" property="id"/>
+            <result column="ee_company" property="company"/>
+            <result column="ee_job" property="job"/>
+            <result column="ee_begin" property="begin"/>
+            <result column="ee_end" property="end"/>
+            <result column="ee_empid" property="empId"/>
+        </collection>
+    </resultMap>
+
 </mapper>

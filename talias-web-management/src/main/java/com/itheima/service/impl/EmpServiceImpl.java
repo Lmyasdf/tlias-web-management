@@ -74,4 +74,10 @@ public class EmpServiceImpl implements EmpService {
         empMapper.delete(ids);
         empExprMapper.delete(ids);
     }
+
+//    查询
+    @Override
+    public Emp search(Integer id){
+        return empMapper.search(id);
+    }
 }
