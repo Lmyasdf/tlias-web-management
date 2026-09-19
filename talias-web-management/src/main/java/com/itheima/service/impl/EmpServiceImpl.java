@@ -9,6 +9,7 @@ import com.itheima.pojo.EmpExpr;
 import com.itheima.pojo.PageResult;
 import com.itheima.service.EmpService;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.jdbc.AbstractSQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,8 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -79,5 +82,25 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public Emp search(Integer id){
         return empMapper.search(id);
+    }
+
+//    修改
+    @Transactional(rollbackFor = {Exception.class})//多数据库操作要事务管理
+    @Override
+    public void update(Emp emp){
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.update(emp);
+
+        //先删除现有员工工作经历
+        empExprMapper.delete(Arrays.asList(emp.getId()));
+
+        //再为新的员工属性赋员工id值
+        List<EmpExpr> exprList = emp.getExprList();
+        if(!CollectionUtils.isEmpty(exprList)){
+            exprList.forEach(empExpr -> empExpr.setEmpId(emp.getId()));
+            //新增工作经历
+            empExprMapper.insertBatch(exprList);
+        }
+
     }
 }

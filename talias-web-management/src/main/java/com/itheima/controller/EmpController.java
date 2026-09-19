@@ -55,6 +55,13 @@ public class EmpController {
         log.info("查询id为：{}",id);
         Emp emp = empService.search(id);
         return Result.success(emp);
+    }
 
+//    修改员工数据
+    @PutMapping
+    public Result update(@RequestBody Emp emp){
+        log.info("修改员工: {}",emp);
+        empService.update(emp);
+        return Result.success();
     }
 }

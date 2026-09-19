@@ -26,4 +26,6 @@ public interface EmpMapper {
 
 
     Emp search(Integer id);
+
+    void update(Emp emp);
 }

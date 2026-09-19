@@ -5,9 +5,9 @@
 <mapper namespace="com.itheima.mapper.EmpExprMapper">
 
     <insert id="insertBatch">
-        insert into emp_expr(emp_id,begin,end,company,job) values
+        insert into emp_expr(begin,end,company,job,emp_id) values
         <foreach collection="exprList" item="expr" separator=",">
-            (#{expr.empId},#{expr.begin},#{expr.end},#{expr.company},#{expr.job})
+            (#{expr.begin},#{expr.end},#{expr.company},#{expr.job},#{expr.empId})
         </foreach>
     </insert>
 
