@@ -1,10 +1,12 @@
 package com.itheima.mapper;
 
 import com.itheima.pojo.Emp;
+import com.itheima.pojo.JobOption;
 import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EmpMapper {
@@ -28,4 +30,6 @@ public interface EmpMapper {
     Emp search(Integer id);
 
     void update(Emp emp);
+
+    List<Map<String,Object>> getEmpJobData();
 }

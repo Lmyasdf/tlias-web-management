@@ -43,7 +43,22 @@
         from emp e left join emp_expr ee on e.id = ee.emp_id
         where e.id = #{id}
     </select>
-<!--   自定义结果集-->
+    <select id="getEmpJobData" resultType="java.util.Map">
+        select
+         (case when job = 1 then '前端开发'
+         when job = 2 then '后端开发'
+         when job = 3 then '数据库开发'
+         else '其他') jobName,
+         count(*) num
+        from emp
+        group by job
+        order by num desc
+    </select>
+
+
+
+
+    <!--   自定义结果集-->
     <resultMap id="rm" type="com.itheima.pojo.Emp">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
