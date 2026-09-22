@@ -2,6 +2,7 @@ package com.itheima.mapper;
 
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.JobOption;
+import com.itheima.pojo.User;
 import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
@@ -32,4 +33,7 @@ public interface EmpMapper {
     void update(Emp emp);
 
     List<Map<String,Object>> getEmpJobData();
+
+    @Select("select e.*,d.name as deptName from emp e left join dept d on e.dept_id = d.id where e.username = #{username} and e.password = #{password}")
+    User login(Emp emp);
 }

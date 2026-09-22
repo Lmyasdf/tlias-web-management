@@ -2,6 +2,7 @@ package com.itheima.service;
 
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.PageResult;
+import com.itheima.pojo.User;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -18,4 +19,6 @@ public interface EmpService {
     Emp search(Integer id);
 
     void update(Emp emp);
+
+    User login(Emp emp);
 }

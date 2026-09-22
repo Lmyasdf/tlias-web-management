@@ -2,6 +2,7 @@ package com.itheima.exception;
 
 import com.itheima.pojo.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 //全局异常处理类
@@ -9,13 +10,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler
+    @ExceptionHandler(Exception.class)
     public Result handleException(Exception e){
         log.error("程序出错了",e);
         return Result.error("程序出错了");
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(DuplicateKeyException.class)
     public Result handleDuplicateKeyException(Exception e){
         log.error("程序出错了",e);
         String msg = e.getMessage();

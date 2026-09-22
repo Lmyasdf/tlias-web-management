@@ -7,6 +7,7 @@ import com.itheima.mapper.EmpMapper;
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.EmpExpr;
 import com.itheima.pojo.PageResult;
+import com.itheima.pojo.User;
 import com.itheima.service.EmpService;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.jdbc.AbstractSQL;
@@ -101,6 +102,11 @@ public class EmpServiceImpl implements EmpService {
             //新增工作经历
             empExprMapper.insertBatch(exprList);
         }
+    }
 
+//    登录验证
+    @Override
+    public User login(Emp emp){
+        return empMapper.login(emp);
     }
 }
