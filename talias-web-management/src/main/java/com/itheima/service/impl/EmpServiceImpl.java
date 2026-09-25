@@ -9,6 +9,7 @@ import com.itheima.pojo.EmpExpr;
 import com.itheima.pojo.PageResult;
 import com.itheima.pojo.User;
 import com.itheima.service.EmpService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.jdbc.AbstractSQL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @Service
 public class EmpServiceImpl implements EmpService {
     @Autowired
@@ -107,6 +109,13 @@ public class EmpServiceImpl implements EmpService {
 //    登录验证
     @Override
     public User login(Emp emp){
-        return empMapper.login(emp);
+        //调用Mapper，根据用户名和密码查询员工信息
+        Emp e = empMapper.login(emp);
+        if(e == null){
+            return null;
+        }
+        log.info("登录成功：{}",e.getUsername());
+        return new User(e.getId(),e.getUsername(),e.getName(),"");
+
     }
 }

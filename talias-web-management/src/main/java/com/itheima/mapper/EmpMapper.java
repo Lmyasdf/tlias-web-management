@@ -34,6 +34,6 @@ public interface EmpMapper {
 
     List<Map<String,Object>> getEmpJobData();
 
-    @Select("select e.*,d.name as deptName from emp e left join dept d on e.dept_id = d.id where e.username = #{username} and e.password = #{password}")
-    User login(Emp emp);
+    @Select("select id,username,name from emp e where e.username = #{username} and e.password = #{password}")
+    Emp login(Emp emp);
 }
